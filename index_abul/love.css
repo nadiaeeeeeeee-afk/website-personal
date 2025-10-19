@@ -1,0 +1,91 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: radial-gradient(circle at center, #020611 40%, #000000 100%);
+  overflow: hidden;
+  height: 100vh;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#app {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+canvas#scene {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Overlay teks “Cintaku” */
+#overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  pointer-events: none;
+}
+
+#headline {
+  font-size: 70px;
+  color: #5ec9ff;
+  text-shadow: 0 0 15px #00bfff, 0 0 30px #00bfff, 0 0 60px #0099ff;
+  letter-spacing: 2px;
+  opacity: 0;
+  transition: opacity 2s ease-in-out;
+}
+
+#controls {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 10px 20px;
+  border-radius: 20px;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+}
+
+#controls button {
+  background: #0ff;
+  color: #000;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+#controls button:hover {
+  background: #00bfff;
+  color: #fff;
+  box-shadow: 0 0 15px #00bfff;
+}
+
+#controls input[type="range"] {
+  accent-color: #00bfff;
+  cursor: pointer;
+}
+
+.show-text {
+  opacity: 1 !important;
+}
+

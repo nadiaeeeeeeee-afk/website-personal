@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Love Uu - Cintakuu</title>
+  <link rel="stylesheet" href="love.css">
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: #000;
+      font-family: "Poppins", sans-serif;
+    }
+
+    #overlay h1 {
+      color: #ff66b2;
+      font-size: 60px;
+      text-align: center;
+      text-shadow: 0 0 25px #ff99cc;
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+    }
+
+    #controls {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: white;
+      z-index: 50;
+      text-align: center;
+    }
+
+    button {
+      background-color: #ff66b2;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin: 4px;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background-color: #ff3385;
+    }
+
+    label {
+      margin-left: 10px;
+    }
+
+    /* 💕 Efek Love Berjatuhan */
+    .love {
+      position: fixed;
+      top: -10px;
+      font-size: 22px;
+      color: #ff66b2;
+      text-shadow: 0 0 10px #ff99cc;
+      animation: fall linear forwards;
+      z-index: 20;
+      pointer-events: none;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <canvas id="scene" width="1200" height="700"></canvas>
+    <div id="overlay">
+      <h1 id="headline">Abull</h1>
+    </div>
+
+    <div id="controls">
+      <button id="btn-start" type="button">Mulai</button>
+      <button id="btn-reset" type="button">Reset</button>
+      <label for="particles">Partikel:</label>
+      <input id="particles" type="range" min="100" max="3000" value="900" />
+    </div>
+  </div>
+
+  <!-- 🎵 Musik -->
+  <audio id="bg-music" loop preload="auto">
+    <source src="mylove.mp3" type="audio/mpeg">
+    Browser kamu tidak mendukung audio.
+  </audio>
+
+  <!-- Script animasi partikel -->
+  <script src="lv.js"></script>
+
+  <script>
+    const btnStart = document.getElementById("btn-start");
+    const audio = document.getElementById("bg-music");
+
+    btnStart.addEventListener("click", () => {
+      // 🔊 Putar musik
+      audio.play().catch(err => console.warn("Autoplay dicegah:", err));
+
+      // 💗 Jalankan efek hati jatuh
+      startFallingHearts();
+    });
+
+    // 🌸 Efek love berjatuhan
+    function startFallingHearts() {
+      setInterval(() => {
+        const heart = document.createElement("div");
+        heart.classList.add("love");
+        heart.textContent = "💗";
+
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = (16 + Math.random() * 20) + "px";
+        heart.style.animationDuration = (3 + Math.random() * 4) + "s";
+
+        document.body.appendChild(heart);
+
+        // Hapus elemen setelah jatuh
+        setTimeout(() => heart.remove(), 7000);
+      }, 400); // muncul tiap 0.4 detik
+    }
+  </script>
+</body>
+</html>

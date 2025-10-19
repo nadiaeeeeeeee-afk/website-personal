@@ -1,0 +1,326 @@
+<!DOCTYPE html> 
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>💕 Dunia Cinta 💕</title>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Tampilan Login */
+    #login {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+      width: 320px;
+    }
+
+    #login h2 { color: #ff4d79; }
+
+    #login input {
+      width: 90%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+    }
+
+    #login button {
+      background-color: #ff4d79;
+      border: none;
+      padding: 10px 20px;
+      color: white;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #login button:hover { background-color: #ff2a66; }
+
+    /* Halaman utama */
+    #main {
+      display: none;
+      text-align: center;
+      width: 90%;
+      max-width: 850px;
+      background: white;
+      padding: 40px;
+      border-radius: 25px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    h1 { color: #ff4d79; margin-bottom: 10px; }
+
+    #info { color: #666; margin-bottom: 20px; }
+
+    /* Foto utama */
+    #fotoUtama {
+      width: 300px;
+      margin: 30px auto;
+      display: block;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    }
+
+    #fotoUtama img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 20px;
+    }
+
+    .menu { margin-top: 25px; }
+
+    .menu button {
+      margin: 6px;
+      padding: 10px 18px;
+      background-color: #ff4d79;
+      border: none;
+      border-radius: 10px;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .menu button:hover { background-color: #ff1f66; }
+
+    .content {
+      margin-top: 30px;
+      padding: 20px;
+      border-radius: 15px;
+      background: #fff0f6;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      display: none;
+    }
+
+    #love {
+      font-size: 40px;
+      animation: beat 1s infinite;
+      color: #ff4d79;
+    }
+
+    @keyframes beat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    /* GALERI FOTO */
+    .gallery-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .flip-card {
+      background-color: transparent;
+      width: 160px;
+      height: 160px;
+      perspective: 1000px;
+    }
+
+    .flip-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.8s;
+      transform-style: preserve-3d;
+      cursor: pointer;
+    }
+
+    .flip-card:hover .flip-inner { transform: rotateY(180deg); }
+
+    .flip-front, .flip-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 15px;
+      backface-visibility: hidden;
+      box-shadow: 0 0 8px rgba(0,0,0,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 16px;
+      color: #ff4d79;
+    }
+
+    .flip-front {
+      background: white;
+      border: 2px solid #ffb6c1;
+    }
+
+    .flip-back {
+      transform: rotateY(180deg);
+      background-size: cover;
+      background-position: center;
+    }
+
+    /* Efek Love Berjatuhan */
+    .love {
+      position: fixed;
+      top: -10px;
+      font-size: 24px;
+      color: #ff4d88;
+      animation: fall linear forwards;
+      z-index: 1000;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- LOGIN -->
+  <div id="login">
+    <h2>💌 Masuk ke Dunia Cinta 💌</h2>
+    <input type="text" id="nama" placeholder="Masukkan Nama"><br>
+    <input type="date" id="tanggal"><br>
+    <button onclick="masuk()">Masuk</button>
+  </div>
+
+  <!-- HALAMAN UTAMA -->
+  <div id="main">
+    <h1 id="selamat"></h1>
+    <p id="info"></p>
+
+    <div id="fotoUtama">
+      <img src="poto1.jpg" alt="Poto Kita">
+    </div>
+
+    <div class="menu">
+      <h2>🌸 Menu Cinta 🌸</h2>
+      <button onclick="tampilkan('isiHati')">Isi Hati Aii</button>
+      <button onclick="tampilkan('kataRelate')">Kata-kata untuk Abull</button>
+      <button onclick="tampilkan('galeri')">Poto-poto Kita</button>
+      <button onclick="tampilkan('loveSection')">Love</button>
+      <button onclick="logout()">Keluar</button>
+    </div>
+
+    <!-- ISI HATI -->
+    <div id="isiHati" class="content">
+      <h3>💌 Isi Hati Aii 💌</h3>
+      <p>(jadii disinii aii mau kasih tau sama abull, aii tauu abull capee banget sama kegiatan abull, tidur ga teratur,makan ga teraturr, kerjaan banyak,tugas banyakk. aii cuman mau bilang semangatt teruss yaa cintaa, walaupun aii gaada di samping abull, aii bakall selalu support abull disini, walapun aii gabisa apa2 hhe. aii suka sedih kalo abull gaada waktu untuk aii, tapii disisi lain aii harus paham gimana kalo aii yang diposisi abull, dan aii jga mikir, kalo abull ada waktu pasti abull ngabarin aii. ohh iyaa, aii tuu suka susah tidur kalo gaa sleepcall, karna kan biasanya abull selalu telfon aii kalo aii mau tidurr, tapi semenjak abull ada kegiatan jadi gapernah sleepcall lagi karna abull pulangnya kadang jm 2,3,4 malem, dan tentunya aii udah tidurr.abull kalo mau cerita ke aii, ceritaa aja sayangg, aii selalu ada buat abull. aii jga bangga banget sama abull, liatt abull bisa berdiri didepan orang2, pastii bnykk yaa yang suka sama abull iss, btw aii pamerin vidio abull yg di sg tesla ke bunda, aykk, temen2 kampuss aii wkwkwkk. sebenernyaa aii juga suka ovt, aii kadang mikir "abull beneran sayang aii ga yaa" "apa abull deket sama cwe disna" "kokk abull gaa telfon aii sii" "apa abull bosen yaa sama aii" "abull cape ga yaa sama aii". tapi aii berusaha untuk positive thinking karnaa aii percayaa sama abull, abull bukan orang yang kek gitu, karnaa kalo acaranya udah selesai pastii abull bakall kek dulu lagi. tentunya ini bukan pertama kali abull sibuk karna kegiatann, dan aii udahh mulaii memahamii kalo emngg ada hall yang ga sesuai sama kemauan aii, masaa iyaa aii harus nyuruh abull gausah ikut acara/kegiatan kan gamungkin. ohh iyaa lupaa, aii jgg maless sm abull, kalo misalnya abull lg kesell sama orang lain, aii jg kenaa, terus bales chtt aii singkatt2. intinya, abull boleh sibuk, tapii jangan sampe lupain aii, aii selalu nungguin kabar dari abull, selalu nungguin telfon dari abull, karna aii kesepian kalo ga sama abull, selalu nungguin pap dari abull, aii mntaa tolong bangett sama abull, sesibuk apapun abull jangan lupain aii yaa jangan lupa ngabarin jugaa. 💖)</p>
+    </div>
+
+    <!-- KATA RELATE -->
+    <div id="kataRelate" class="content">
+      <h3>💬 Kata-kata untuk Abull 💬</h3>
+      <p>“Makasii yaa udah bikin hidup aii lebih happy, with everything about you, aii beruntung bangett ketemu abull, i am also very lucky to have you, lovee uu abull 💕”</p>
+      <p>“abull harus tau, kalo setiap harinya aii selalu bangga punya abull, aii selalu sayang sama abull, aii selalu seneng tiap ngobrol sama abull, walaupun kadang ada aja masalah, tapi rasanya selalu bahagia kalau masih sama abull💕”</p>
+      <p>“cinta yang sesungguhnya bukan tentang seberapa sering kamu bilang sayang, tapi seberapa kamu bisa bertahan saat semuanya lagi gaa terasa mudah💖”</p>
+    </div>
+
+    <!-- GALERI FOTO OTOMATIS -->
+    <div id="galeri" class="content">
+      <h3>📸 Poto-poto Kita 📸</h3>
+      <div class="gallery-container" id="gallery"></div>
+    </div>
+
+    <!-- LOVE SECTION -->
+    <div id="loveSection" class="content">
+     <a href="love.html">klik disinii</a>
+  </div>
+
+  <!-- MUSIK -->
+  <audio id="lagu" loop>
+    <source src="song.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    // LOGIN
+    function masuk() {
+      const nama = document.getElementById('nama').value.toLowerCase();
+      const tanggal = document.getElementById('tanggal').value;
+
+      if (nama === "abul" && tanggal === "2024-06-30") {
+        document.getElementById('login').style.display = "none";
+        document.getElementById('main').style.display = "block";
+        document.getElementById('selamat').innerText = "Selamat datang, sayangg 💕";
+        document.getElementById('info').innerText = "💖💖💖";
+
+        // Jalankan musik
+        const lagu = document.getElementById('lagu');
+        lagu.play().catch(() => {
+          alert("💡 Tekan layar sekali supaya musik bisa jalan 🎵");
+        });
+
+        // Jalankan efek love
+        setInterval(createLove, 300);
+
+        // Isi galeri otomatis 1–30
+        const fotoData = [
+          "10 Juli 2024","15 Juli 2024","26 Juli 2024","1 Agustus 2024","2 Agustus 2024",
+          "6 September 2024","12 Januari 2025","15 Januari 2025","17 Januari 2025","18 Januari 2025",
+          "25 Januari 2025","26 Januari 2025","27 Januari 2025","29 Januari 2025","6 Februari 2025",
+          "7 Februari 2025","11 Februari 2025","12 Februari 2025","29 Maret 2025","31 Maret 2025",
+          "3 April 2025","26 Juni 2025","27 Juni 2025","16 Juli 2025","28 Juli 2025",
+          "3 Agustus 2025","8 Agustus 2025","13 Agustus 2025","17 Agustus 2025","30 Agustus 2025"
+        ];
+        const gallery = document.getElementById("gallery");
+        fotoData.forEach((tgl, i) => {
+          const card = document.createElement("div");
+          card.className = "flip-card";
+          card.innerHTML = `
+            <div class="flip-inner">
+              <div class="flip-front">💞 ${tgl} 💞</div>
+              <div class="flip-back" style="background-image:url('poto${i+2}.jpg')"></div>
+            </div>
+          `;
+          gallery.appendChild(card);
+        });
+      } else {
+        alert("Nama atau tanggal pacaran salah 😢");
+      }
+    }
+
+    // Efek Love Berjatuhan
+    function createLove() {
+      const love = document.createElement('div');
+      love.classList.add('love');
+      love.innerHTML = '💖';
+      love.style.left = Math.random() * window.innerWidth + 'px';
+      love.style.animationDuration = 3 + Math.random() * 3 + 's';
+      love.style.fontSize = 16 + Math.random() * 20 + 'px';
+      document.body.appendChild(love);
+      setTimeout(() => love.remove(), 6000);
+    }
+
+    // TAMPILKAN MENU
+    function tampilkan(id) {
+      const all = document.querySelectorAll('.content');
+      all.forEach(el => el.style.display = 'none');
+      document.getElementById(id).style.display = 'block';
+    }
+
+    // LOGOUT
+    function logout() {
+      alert("bye bye abull 💞");
+      location.reload();
+    }
+  </script>
+</body>
+</html>
